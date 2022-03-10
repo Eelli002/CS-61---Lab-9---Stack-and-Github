@@ -36,7 +36,7 @@ LDR R4, R6, 0
 HALT
 Int_Stack   .FILL   x4200
 push_val_ptr    .FILL   x3400
-add_val_prt     .FILL x3800
+add_val_ptr     .FILL x3800
 
 .end
 
@@ -63,17 +63,29 @@ RET
 ; returns: This function does not return a value
 ;---------------------------------------------------------------------------------
 .orig x3800 ;; add_val() pops two values from the top of the stack and pushes the result of adding the poppped value into the stack
+    ST R3, R3_str_x3800
+    ST R4, R4_str_x3800
+    ST R5, R5_str_x3800
+
+
     AND R3, R3, x0
 
-    LDR R4, R6
+    LDR R4, R6, #0
     STR R3, R6, #0
     ADD R6, R6, x-1
 
-    LDR R5, R6
+    LDR R5, R6, #0
     ADD R4, R4, R5
     STR R4, R6, #0
 
+    LD R3, R3_str_x3800
+    LD R4, R4_str_x3800
+    LD R5, R5_str_x3800
+
     RET
+    R3_str_x3800    .BLKW   #1
+    R4_str_x3800    .BLKW   #1
+    R5_str_x3800    .BLKW   #1
 
 .end
 
@@ -82,5 +94,3 @@ RET
 .orig x4200 ;;data you might need
 
 .end
-
-
