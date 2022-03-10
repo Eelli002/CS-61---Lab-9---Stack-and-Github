@@ -30,7 +30,8 @@ JSRR    R5
 JSRR R5
 
 ;move the top value of the stack into r4
-LDR R4, R6, 0
+ADD R6, R6, x-1
+LDR R4, R6, #0
 
 
 HALT
@@ -70,6 +71,7 @@ RET
 
     AND R3, R3, x0
 
+    ADD R6, R6, x-1
     LDR R4, R6, #0
     STR R3, R6, #0
     ADD R6, R6, x-1
@@ -77,6 +79,7 @@ RET
     LDR R5, R6, #0
     ADD R4, R4, R5
     STR R4, R6, #0
+    ADD R6, R6, x1
 
     LD R3, R3_str_x3800
     LD R4, R4_str_x3800
